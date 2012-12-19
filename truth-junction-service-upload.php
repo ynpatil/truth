@@ -1,0 +1,135 @@
+<?php	
+	session_start();
+	include("common/config.php");
+	include ("common/app_function.php");
+
+	if ($_GET[sorton]!="")
+	{
+		 $condition2=" ORDER BY ". $_GET[sorton]. " ". $_GET[sortby];
+	}
+		
+	$condition[]="esdoc_service_id ='$expid'";
+
+	if(is_array($condition))
+	{
+		$condition=" WHERE " . implode(" AND ",$condition);
+	}
+
+	$que="SELECT * FROM ".$tblpref."exp_ser_docup $condition $condition2";
+	
+	$curr_query="sorton=".$_GET[sorton]."&sortby=".$_GET[sortby];
+	$pagesize=20;
+	$the_query  = pagination($que,$page,null,$curr_query,$pagesize);
+	$real_string     = explode("~" , $the_query);
+	$que= $que.$cstr." LIMIT ". $real_string[0];
+	$show_status     = $real_string[2];
+	$show_pagination = $real_string[1];
+	if (!($page_res = mysql_query($que))) 
+	{ echo "FOR QUERY: $strsql<BR>".mysql_error(); 	exit;}
+	$rowCount = mysql_num_rows($page_res);
+	$srnum=$real_string[0][0];
+	$srnum= $real_string[0];
+	$srnum=explode(",",$srnum);
+	$count=$srnum[0];
+
+	index_header('My Service Document');
+?>
+<div id="expertpanel">
+<script type="text/javascript" src="js/thickbox-compressed.js"></script>
+<link href="css/thickbox.css" rel="stylesheet" type="text/css" />
+
+<div class="head-title-bg">
+	<div class="crumb">
+	<a href="index.php"><strong>Home</strong></a>&nbsp;&raquo; <a href="truth-junction-exp-service.php"><strong>My Services</strong></a>&nbsp;&raquo; <?=$_REQUEST[name]?>
+	</div></div>
+
+	<div style="width:696px;">
+		<table  cellpadding="0" cellspacing="0" border="0" align="center" class="pad-left">
+			<tr>
+			<td colspan="3" valign="top" class="round-box-bg-inner">
+				<div class="round-box-t-inner">
+					<div class="pad8"><h2>My Service Document :: <?=$_REQUEST[name]?></h2>
+
+					<div class="button-curve" style="float:right; padding-top:10px;"><a href="expert-service-doc-upload.php?expid=<?=$expid?>&name=<?=$_REQUEST[name]?>&TB_iframe=true&height=200&width=680" class="thickbox"><span>Upload Document</span></a></div>
+
+					<? if($flag=="add") { ?>
+					<table>
+					<tr><td height="20" class="warning" align="center" colspan="2"> Service has been added successfully</td></tr></table>
+					<? } ?>
+					<? if($flag=="del") { ?>
+					<table>
+					<tr><td height="20" class="warning" align="center" colspan="2"> Service has been deleted successfully</td></tr></table>
+					<? } ?>
+
+					<div class="clear"></div>
+					<div style="padding-top:10px;">
+					<!--  -->
+					<div class="table-block">
+			
+					 <TABLE cellspacing="0" cellpadding="0" border="0" width="100%">
+						<TD  align= "center" width="80%" class="tdclass1"><?=$show_pagination?></TD>
+						<TD align= "right" width="20%"class="tdclass1"><?=$show_status?></TD>
+					</table>
+
+					<table width="100%">
+					<thead>
+					<tr>
+						<th class="head1" align="center">Document Type</th>
+						<th class="head1" align="center">Document Name</th>
+						<th class="head1" align="center">Date Of Posting</th>
+						<th class="head1" align="center">Download</th>
+					</tr>
+					</thead>
+					<tbody>
+					<?
+					while($row_category=mysql_fetch_array($page_res))
+					{ 
+						$count ++;
+					?>
+
+						<tr class="light" height="30">
+							<td class="head1">
+							<? $doctype = explode(".",$row_category[esdoc_upload]);
+						
+							?>
+							
+							<img src="images/<? echo $doctype[1].'.jpeg';?>" alt="<?=$row_category[esdoc_name]?>" height="90" width="120">
+							
+							</td>
+							<td class="head1"><?=$row_category[esdoc_name]?></td>
+							<td class="head1">
+							<? 
+							   $txtdate = explode(" ",$row_category[esdoc_date]);
+							   echo dateformate1($txtdate[0])."<br>";
+							   echo $txtdate[1];								
+							?>
+							</td>
+							<td class="head1">
+							<a href="download.php?doc=<?=$row_category[esdoc_upload]?>">
+							<strong>Download</strong></a>&nbsp;&nbsp;|&nbsp;<a href="submit-doc-upload.php?id=<?=$row_category[esdoc_id]?>&name=<?=$_REQUEST[name]?>&mode=del&expid=<?=$row_category[esdoc_service_id]?>">
+							<strong>Delete</strong></a></td>
+						</tr>
+					<? } ?>
+
+					</tbody>
+					</table>
+
+					<table cellspacing="0" cellpadding="0" border="0" width="100%">
+					<TD  align= "center" width="80%" class="tdclass1"><?=$show_pagination?></TD>
+					<TD align= "right" width="20%"class="tdclass1"><?=$show_status?></TD>
+					</table>
+                     </div>
+					<!--  -->
+					</div>
+				</div>
+			<div class="clear"></div>
+			</div>
+			</td>
+			</tr>
+		</table>
+	</div>
+	</div>
+	</div>
+	<div class="clear"></div>
+</div>
+<?php index_footer_mem_exp() ?>

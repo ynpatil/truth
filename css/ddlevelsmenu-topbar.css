@@ -1,0 +1,86 @@
+/* ######### Sliding Doors Menu CSS ######### */
+
+.slidetabsmenu{
+width:90%;
+line-height:normal;
+/*border-bottom: 1px solid gray;*/
+text-transform:uppercase;
+float:left;
+}
+
+.slidetabsmenu ul{
+list-style-type: none;
+margin:0;
+margin-left: 0px;
+padding:0;
+overflow: hidden;
+}
+
+.slidetabsmenu li{
+display:inline;
+margin:0;
+padding:7px 4px 0px 4px;
+background:url(../images/nav-seprator.jpg) 100% 0 no-repeat; float:left;
+}
+
+.slidetabsmenu li.no-img{
+display:inline;
+margin:0;
+padding:7px 4px 0px 4px;
+background:none; float:left;
+}
+
+.slidetabsmenu a{
+float:left;
+background:url(../images/tab-lt.jpg) no-repeat left top;
+margin-right:2px;
+padding:0 0 0 8px;
+text-decoration:none;
+cursor:pointer;
+}
+
+.slidetabsmenu a span{
+float:left;
+display:block;
+background:url(../images/tab-rt.jpg) no-repeat right top;
+padding:7px 8px 10px 3px;
+font-weight:normal;
+color:#000;
+}
+
+/* Commented Backslash Hack hides rule from IE5-Mac \*/
+.slidetabsmenu a span {float:none;}
+/* End IE5-Mac hack */
+
+.slidetabsmenu li a:hover{
+color: #FFF;
+background:url(../images/btn-l-h.jpg) 0 0 no-repeat; display:inline-block;
+}
+
+.slidetabsmenu li a:hover span{
+color: #FFF;
+background:url(../images/btn-r-h.jpg) 100% 0 no-repeat; display:inline-block;
+}
+
+.slidetabsmenu #current a{
+background-position:0 -37px;
+}
+
+.slidetabsmenu #current a span{
+background-position:100% -37px;
+color: #fff;
+}
+
+.slidetabsmenu a:hover, .slidetabsmenu li a.selected{
+background-position:0% -37px;
+background:url(../images/btn-l-h.jpg) 0 0 no-repeat; display:inline-block;
+color: #fff;
+
+}
+
+.slidetabsmenu a:hover span, .slidetabsmenu li a.selected span{
+background-position:100% -37px;
+background:url(../images/btn-r-h.jpg) 100% 0 no-repeat; display:inline-block;
+color: #fff;
+
+}

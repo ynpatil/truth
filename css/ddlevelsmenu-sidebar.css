@@ -1,0 +1,76 @@
+/* ######### Marker List Vertical Menu ######### */
+
+.markermenu{
+width: 226px; /*width of side bar menu*/
+clear: left;
+position: relative; /*Preserve this for "right" arrow images (added by script) to be positioned correctly*/
+background:#00ccff;
+}
+
+.markermenu ul{
+list-style-type: none;
+margin: 0px 0;
+padding: 0;
+border: 1px solid #00ccff;
+}
+
+.markermenu ul li a{
+background: #00ccff url(bulletlist.gif) no-repeat 3px center; /*light gray background*/
+font: bold 12px Verdana, Arial, Helvetica, sans-serif;
+color: white;
+display: block;
+width: auto;
+padding: 7px 0;
+padding-left: 20px;
+text-decoration: none;
+border-bottom: 1px solid white;
+}
+
+* html .markermenu ul li a{ /*IE6 hack*/
+width: 155px;
+}
+
+.markermenu ul li a:visited, .markermenu ul li a:active{
+color: #333333;
+}
+
+.markermenu ul li a:hover, .markermenu ul li a.selected{
+color: white;
+background-color: #636363;
+}
+
+
+.ddsubmenustyle li a{
+/*background: #043846;*/ /*light gray background*/
+background-color:#0fa1da;
+color: white;
+
+}
+
+* html .ddsubmenustyle li a{ /*IE6 hack*/
+width: 155px;
+}
+
+.ddsubmenustyle li a:visited, .ddsubmenustyle li a:active{
+color: white;
+}
+
+.ddsubmenustyle li a:hover, .ddsubmenustyle li a.selected{
+color: white;
+background-color: #636363;
+}
+
+
+
+
+/* ######### Customized Drop Down ULs CSS (inherits from ddlevelsmenu-base.css) ######### */
+
+.blackwhite li a,{
+background: white;
+}
+
+.blackwhite li a:hover{
+background: #616161;
+color: #ffffff;
+
+}
